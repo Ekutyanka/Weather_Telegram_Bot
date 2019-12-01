@@ -1,0 +1,37 @@
+# -*- coding: utf-8 -*-
+
+# Подключаем модуль pyowm
+import pyowm
+
+
+def get_weather_function(place):
+	"""Выводит погоду в определенном городе"""
+	# Предоставляем API-ключ
+	owm = pyowm.OWM('71e278ea30399253c9cb16b1bd616a85') 
+
+	# Получаем данные о погоде
+	observation = owm.weather_at_place(place)
+	weather = observation.get_weather()
+
+	# Вытаскиваем необходимые нам данные 
+	temp = weather.get_temperature('celsius')["temp"]
+	wind_speed = weather.get_wind()["speed"]
+	main_status = weather.get_detailed_status()
+
+	# Форматируем вывод
+	answer = ("Now in " + place + " about " + str(round(temp)) + 
+		" degrees Celsius. " + main_status.title() + ".\n")
+	answer += ("Wind about " + str(round(wind_speed)) +
+		" meters per second.")
+	
+	# Возврат результата
+	return answer
+
+
+# ВСЕ ЧТО ЕСТЬ В ФУНКЦИИ НЕ НУЖНО ПИСАТЬ В ОСНОВНОМ КОДЕ!!!
+
+
+
+
+
+
