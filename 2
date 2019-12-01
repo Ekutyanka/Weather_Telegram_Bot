@@ -1,0 +1,15 @@
+import pyowm
+import telebot
+
+from get_weather import get_weather_function
+
+bot = telebot.TeleBot("732390950:AAEFCtcV58_4C-7otiWOhyvSvC4qLvDGfrs")
+
+
+
+@bot.message_handler(content_types = ['text'])
+def send_answer(message):
+	answer = get_weather_function(message.text)
+	bot.send_message(message.chat.id, answer)
+
+bot.polling(none_stop = True)
